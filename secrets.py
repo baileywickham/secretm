@@ -21,23 +21,17 @@ class Secrets(Model):
                 f.write(path + '\n')
 
         if os.path.exists(path):
-            self.f = self.open(path)
-            self.d = yaml.load(self.f, Loader=yaml.FullLoader)
+            with open(path, 'r') as f:
+                self.d = yaml.load(f, Loader=yaml.FullLoader)
 
     def save(self):
-        yaml.dump(self.d, self.f)
+        with open(self.path, 'w') as f:
+            yaml.dump(self.d, f)
 
     def __getitem__(self, key):
         return self.d[key]
 
     def __setitem__(self, key, value):
-        if not self.f:
-            self.f = self.open_r(self.path)
         self.d[key] = value
         self.save()
 
-
-    def open_r(self, path):
-        f = open(path, "a+")
-        f.seek(0)
-        return f
