@@ -1,6 +1,12 @@
 [build-system]
-requires = [
-    "setuptools>=42",
-    "wheel"
-]
-build-backend = "setuptools.build_meta"
+requires = ["flit_core >=2,<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.flit.metadata]
+module = "secret"
+author = "Bailey Wickham"
+author-email = "baileywickham@gmail.com"
+home-page = "https://github.com/baileywickham/secrets"
+classifiers = [ "License :: OSI Approved :: MIT License",]
+description-file = "README.md"
+
