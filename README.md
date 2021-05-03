@@ -1,6 +1,8 @@
 # secrets
 A tiny secret manager in python. Adds the secrets file to the `.gitignore`.
 
+## TODO
+- Add encryption with public RSA key
 
 ## Example
 ```python
