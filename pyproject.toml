@@ -1,5 +1,13 @@
+[project]
+dependencies = [
+    'PyYAML',
+]
+
 [build-system]
-requires = ["flit_core >=2,<4"]
+requires = [
+    "flit_core >=2,<4",
+    'setuptools_scm'
+]
 build-backend = "flit_core.buildapi"
 
 [tool.flit.metadata]
