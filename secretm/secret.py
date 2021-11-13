@@ -15,7 +15,7 @@ class Model(dict):
     __setattr__ = dict.__setitem__
 
 class Secrets(Model):
-    def __init__(self, datafile="secrets"):
+    def __init__(self, datafile="secrets")
         self.datafile : str = datafile
         self.datafile_enc : str = datafile + '.enc'
         self.fernet_key_enc : str = 'key.enc'
@@ -90,6 +90,7 @@ class Secrets(Model):
 
     def getFernetKey(self):
         if self.fernet_key == None:
+
             self.fernet_key = Fernet.generate_key()
         return self.fernet_key
 
