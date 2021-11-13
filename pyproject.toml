@@ -1,6 +1,6 @@
-[project]
 dependencies = [
     'PyYAML',
+    'pycryptodome',
 ]
 
 [build-system]
