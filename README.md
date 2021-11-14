@@ -1,5 +1,5 @@
 # secrets
-A tiny secret manager in python. Adds the secrets file to the `.gitignore`, uploads an encrypted copy encrypted
+A tiny secret manager in python. Adds the secrets file to the `.gitignore`, uploads a copy encrypted
 with your ssh key.
 
 
