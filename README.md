@@ -2,6 +2,9 @@
 A tiny secret manager in python. Adds the secrets file to the `.gitignore`, uploads a copy encrypted
 with your ssh key.
 
+## Install
+`pip install --user secretm`
+
 
 ## TODO
 - [x] Add encryption with public RSA key
