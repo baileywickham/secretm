@@ -1,15 +1,14 @@
 import yaml
-import string
-import random
 import os
 import urllib.request
 from pathlib import Path
+from typing import Optional, Any
 
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import AES, PKCS1_OAEP
 from Crypto.Random import get_random_bytes
 
-def resolvePath(path: str) -> str:
+def resolvePath(path: str) -> Path:
     return Path(path).expanduser().resolve()
 
 class Model(dict):
@@ -20,21 +19,21 @@ class Model(dict):
 class Secrets(Model):
     def __init__(self, datafile="secrets",
             gh_user='baileywickham',
-            public_key_file=None,
-            private_key_file='~/.ssh/id_rsa',
+            public_key_file:str=None,
+            private_key_file:str='~/.ssh/id_rsa',
             public_key=None,
             private_key=None):
         self.datafile : str = datafile
         self.datafile_enc : str = datafile + '.enc'
 
         self.gh_user : str = gh_user
-        self.public_key_file : str = public_key_file
+        self.public_key_file : Optional[str] = public_key_file
         self.private_key_file : str = private_key_file
 
         self.public_key : RSA = public_key
         self.private_key : RSA = private_key
 
-        self.secrets = {}
+        self.secrets: dict[str, Any] = {}
 
         self.addToGitignore()
 
@@ -72,7 +71,7 @@ class Secrets(Model):
         with open(".gitignore", "a+") as f:
             f.seek(0)
             for line in f:
-                if self.path == line.strip("\n"):
+                if self.datafile == line.strip("\n"):
                     break
             else:
                 f.write(self.datafile + '\n')
