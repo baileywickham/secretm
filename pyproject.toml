@@ -1,20 +1,17 @@
-dependencies = [
-    'PyYAML',
-    'pycryptodome',
-]
+[tool.poetry]
+name = "secretm"
+version = "0.1.0"
+description = ""
+authors = ["baileywickham <baileywickham@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+PyYAML = "^6.0"
+pycryptodome = "^3.11.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
 
 [build-system]
-requires = [
-    "flit_core >=2,<4",
-    'setuptools_scm'
-]
-build-backend = "flit_core.buildapi"
-
-[tool.flit.metadata]
-module = "secretm"
-author = "Bailey Wickham"
-author-email = "baileywickham@gmail.com"
-home-page = "https://github.com/baileywickham/secrets"
-classifiers = [ "License :: OSI Approved :: MIT License",]
-description-file = "README.md"
-
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
