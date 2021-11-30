@@ -17,21 +17,21 @@ class Model(dict):
     __setattr__ = dict.__setitem__
 
 class Secrets(Model):
-    def __init__(self, datafile="secrets",
-            gh_user='baileywickham',
-            public_key_file:str=None,
+    def __init__(self, datafile:str="secrets",
+            gh_user:str=None,
+            public_key_file:str='~/.ssh/id_rsa.pub',
             private_key_file:str='~/.ssh/id_rsa',
             public_key=None,
             private_key=None):
         self.datafile : str = datafile
         self.datafile_enc : str = datafile + '.enc'
 
-        self.gh_user : str = gh_user
+        self.gh_user : Optional[str] = gh_user
         self.public_key_file : Optional[str] = public_key_file
         self.private_key_file : str = private_key_file
 
-        self.public_key : RSA = public_key
-        self.private_key : RSA = private_key
+        self.public_key : RSA.RsaKey = public_key
+        self.private_key : RSA.RsaKey = private_key
 
         self.secrets: dict[str, Any] = {}
 
@@ -53,6 +53,9 @@ class Secrets(Model):
 
     def __repr__(self):
         return self.secrets.__repr__()
+
+    def close(self):
+        self.save()
 
     def save(self):
         self.saveSecrets()
@@ -81,20 +84,20 @@ class Secrets(Model):
             if self.public_key_file and self.gh_user:
                 raise Exception('only one public key may be provided')
 
-            if self.gh_user:
+            if self.public_key_file:
+                with open(resolvePath(self.public_key_file), 'rb') as f:
+                    self.public_key = RSA.importKey(f.readline())
+            elif self.gh_user:
                 with urllib.request.urlopen(f'https://github.com/{self.gh_user}.keys') as response:
                     self.public_key = RSA.importKey(response.readline()) #.decode('utf8').strip()
-            else:
-                with open(self.public_key_file, 'rb') as f:
-                    self.public_key = RSA.importKey(f.readline())
 
-    def getPublicKey(self) -> str:
+    def getPublicKey(self) -> RSA.RsaKey:
         if not self.public_key:
             self.setPublicKey()
 
         return self.public_key
 
-    def getPrivateKey(self) -> str:
+    def getPrivateKey(self) -> RSA.RsaKey:
         if not self.private_key:
             with open(resolvePath(self.private_key_file), 'r') as f:
                 self.private_key = RSA.importKey(f.read())

@@ -6,6 +6,12 @@ with your ssh key.
 `pip install --user secretm`
 
 
+## Use
+Instantiate the module:
+```python
+s = secretm.Secrets()
+```
+
 ## TODO
 - [x] Add encryption with public RSA key
 - [x] Store key in header of encrypted file

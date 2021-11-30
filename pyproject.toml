@@ -5,7 +5,7 @@ description = ""
 authors = ["baileywickham <baileywickham@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.9"
 PyYAML = "^6.0"
 pycryptodome = "^3.11.0"
 
