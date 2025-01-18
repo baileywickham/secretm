@@ -8,6 +8,7 @@ authors = ["baileywickham <baileywickham@gmail.com>"]
 python = "^3.9"
 PyYAML = "^6.0"
 pycryptodome = "^3.11.0"
+mypy = "^0.910"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

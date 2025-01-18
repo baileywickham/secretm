@@ -44,3 +44,8 @@ s['api_key'] = 'abc'
 # Print the secret
 print(s['api_key'])
 ```
+
+
+## Development
+Use `poetry install` to install from the poetry file. This project uses `mypy` for
+static type checking, though the crypto library isn't happy with that.
